@@ -123,5 +123,10 @@ router.get(
     });
   }
 );
-
+router.get('/getall',(req,res,next)=>{
+  User.find()
+  .exec()
+  .then(res => res.status(200).json(res))
+  .catch(err => res.status(500).json(err));
+})
 module.exports = router;
