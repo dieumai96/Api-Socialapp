@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { registerUser } from './../../actions/authAction';
 import { withRouter } from 'react-router-dom';
 import PropTypes  from 'prop-types'; 
+import TextFieldGroup from './../common/TextFieldGroup';
 class Register extends Component {
   constructor() {
     super();
@@ -15,7 +16,7 @@ class Register extends Component {
       error: {},
     }
   }
-  onchange = (e) => {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
   componentWillReceiveProps(nextProps){
@@ -48,52 +49,39 @@ class Register extends Component {
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your DevConnector account</p>
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input type="text"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': error.name
-                    })} placeholder="Name"
-                    onChange={this.onchange}
-                    name="name"
-                    value={this.state.name}
-                  />
-                  {error.name && (<div className="invalid-feedback">{error.name}</div>)}
-                </div>
-                <div className="form-group">
-                  <input type="email"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': error.email
-                    })}
-                    placeholder="Email Address"
-                    value={this.state.email}
-                    onChange={this.onchange}
-                    name="email" />
-                  {error.email && (<div className="invalid-feedback">{error.email}</div>)}
-                  <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
-                </div>
-                <div className="form-group">
-                  <input type="password"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': error.password
-                    })}
-                    placeholder="Password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onchange}
-                  />
-                  {error.password && (<div className="invalid-feedback">{error.password}</div>)}
-                </div>
-                <div className="form-group">
-                  <input type="password"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': error.password2
-                    })}
-                    placeholder="Confirm Password"
-                    value={this.state.password2}
-                    onChange={this.onchange}
-                    name="password2" />
-                  {error.password2 && (<div className="invalid-feedback">{error.password2}</div>)}
-                </div>
+              <TextFieldGroup
+                  placeholder = "Name"
+                  type = "text"
+                  name = "name"
+                  value = {this.state.name}
+                  onChange = {this.onChange}
+                  error = {error.name}
+                />
+                <TextFieldGroup
+                  placeholder = "Email Address"
+                  type = "email"
+                  name = "email"
+                  value = {this.state.email}
+                  onChange = {this.onChange}
+                  error = {error.email}
+                  info = "This site uses Gravatar so if you want a profile image, use a Gravatar email"
+                />
+                <TextFieldGroup
+                  placeholder = "Password"
+                  type = "password"
+                  name = "password"
+                  value = {this.state.password}
+                  onChange = {this.onChange}
+                  error = {error.password}
+                />
+                <TextFieldGroup
+                  placeholder = "Password"
+                  type = "password"
+                  name = "password2"
+                  value = {this.state.password2}
+                  onChange = {this.onChange}
+                  error = {error.password2}
+                />
                 <input type="submit" className="btn btn-info btn-block mt-4" value="Submit" />
               </form>
             </div>
