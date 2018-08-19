@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS , SET_CURRENT_USER } from './../actions/types';
+import { GET_PROFILE, GET_PROFILES ,PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER } from './../actions/types';
 
 
 // get current profile 
@@ -30,16 +30,68 @@ export const createProfile = (profileData, history) => dispatch => {
       })
     })
 }
-export const addExpirence  = (exData, history) => dispatch => {
-   axios
-    .post('/api/profile/experience',exData)
+// add expirence 
+export const addExpirence = (exData, history) => dispatch => {
+  axios
+    .post('/api/profile/experience', exData)
     .then(res => history.push('/dashboard'))
     .catch(err => {
       dispatch({
-        type : GET_ERRORS,
-        payload : err.response.data
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     })
+}
+// delete experience 
+export const deleteExperience = (id) => dispatch => {
+  if (window.confirm('Are you sure')) {
+    axios
+      .delete(`/api/profile/experience/${id}`)
+      .then(res => {
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data,
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data,
+        })
+      })
+  }
+}
+
+//  add education
+export const addEducation = (edData, history) => dispatch => {
+  axios
+    .post('/api/profile/education', edData)
+    .then(res => history.push('/dashboard'))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    })
+}
+// deleteEducation 
+export const deleteEducation = (id) => dispatch => {
+  if (window.confirm('Are you sure')) {
+    axios
+      .delete(`/api/profile/education/${id}`)
+      .then(res => {
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data,
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data,
+        })
+      })
+  }
 }
 // delete account 
 export const deleteAccount = () => dispatch => {
@@ -59,6 +111,10 @@ export const deleteAccount = () => dispatch => {
 
       )
   }
+}
+
+export const getProfiles = () => dispatch => {
+    
 }
 // profile loading 
 export const setProfileLoading = () => {

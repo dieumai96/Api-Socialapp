@@ -17,6 +17,8 @@ import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddExpirence from './components/add_crendentials/AddExpirence';
+import AddEducation from './components/add_crendentials/AddEducation';
+import Profiles from './components/profiles/Profiles';
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   // decoded token and get user info
@@ -45,6 +47,7 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/profiles" component={Profiles} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
@@ -56,6 +59,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/add-experience" component={AddExpirence} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-education" component={AddEducation} />
               </Switch>
             </div>
             <Footer />
