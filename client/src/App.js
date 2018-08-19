@@ -15,7 +15,8 @@ import './App.css';
 import store from './store';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/create-profile/CreateProfile';
-
+import EditProfile from './components/edit-profile/EditProfile';
+import AddExpirence from './components/add_crendentials/AddExpirence';
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   // decoded token and get user info
@@ -49,6 +50,12 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-experience" component={AddExpirence} />
               </Switch>
             </div>
             <Footer />
